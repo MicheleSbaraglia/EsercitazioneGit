@@ -10,7 +10,7 @@ public class Utility {
 	}
 	
 	public static int getCount(){
-		return COUNT;
+		return COUNT + 1;
 	}
 	
 
