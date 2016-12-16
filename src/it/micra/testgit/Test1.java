@@ -7,7 +7,7 @@ public class Test1 {
 		for (int i = 0; i < Utility.getCount(); i++) {
 			System.out.println(Utility.getTitle()+" - " + i + "!");
 		}
-		System.out.println("terminato");
+		System.out.println("terminato!!!!");
 		
 	}
 
