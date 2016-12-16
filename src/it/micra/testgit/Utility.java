@@ -2,7 +2,7 @@ package it.micra.testgit;
 
 public class Utility {
 	
-	private static final String TITLE = "Hello World!";
+	private static final String TITLE = "Hello World GIT!";
 	private static final int COUNT = 30;
 	
 	public static String getTitle(){
