@@ -1,5 +1,6 @@
 package it.micra.test;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,19 +11,22 @@ public class TestFineTrimestrePrecedente {
 
 
 	public static void main(String[] args) {
-		
-		Calendar dtContabile = Calendar.getInstance();
-		dtContabile.set(2006, 0, 21);
-		Date dataContabile = dtContabile.getTime();
+			
+		Date dataContabile = null;
+		try {
+			dataContabile = sdf.parse("01/01/2015");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("DATA CONTABILE: " + sdf.format(dataContabile) + "\n\n");
 		
 		Date trimestre = calcolaTrimestre(dataContabile);
 		
 		if(trimestre != null){
-			System.out.println("\n\nTRIMESTRE DI RIFERIMENTO: " + sdf.format(trimestre));
-		}
-
+			System.out.println("\n\nTRIMESTRE DI RIFERIMENTOccc: " + sdf.format(trimestre));
+		}	
 		
 	}
 	
@@ -33,46 +37,34 @@ public class TestFineTrimestrePrecedente {
 		Calendar primoTrimestre = Calendar.getInstance();
 		primoTrimestre.setTime(dataContabile);
 		primoTrimestre.add(Calendar.YEAR, -1);
-		primoTrimestre.set(Calendar.MONTH,primoTrimestre.getActualMaximum(Calendar.MONTH));	
+		primoTrimestre.set(Calendar.DATE,primoTrimestre.getActualMinimum(Calendar.DAY_OF_MONTH));
+		primoTrimestre.set(Calendar.MONTH,Calendar.DECEMBER);	
 		primoTrimestre.set(Calendar.DATE,primoTrimestre.getActualMaximum(Calendar.DAY_OF_MONTH));
-		primoTrimestre.clear(Calendar.HOUR);
-		primoTrimestre.clear(Calendar.MINUTE);
-		primoTrimestre.clear(Calendar.SECOND);
-		primoTrimestre.clear(Calendar.MILLISECOND);
 		System.out.println("PRIMO TRIMESTRE: " + sdf.format(primoTrimestre.getTime()));
 		
 		//MARZO
 		Calendar secondoTrimestre = Calendar.getInstance();
-		secondoTrimestre.setTime(dataContabile);
-		secondoTrimestre.set(Calendar.MONTH,Calendar.MARCH);	
+		secondoTrimestre.setTime(dataContabile);	
+		secondoTrimestre.set(Calendar.DATE,secondoTrimestre.getActualMinimum(Calendar.DAY_OF_MONTH));
+		secondoTrimestre.set(Calendar.MONTH,Calendar.MARCH);
 		secondoTrimestre.set(Calendar.DATE,secondoTrimestre.getActualMaximum(Calendar.DAY_OF_MONTH));
-		secondoTrimestre.clear(Calendar.HOUR);
-		secondoTrimestre.clear(Calendar.MINUTE);
-		secondoTrimestre.clear(Calendar.SECOND);
-		secondoTrimestre.clear(Calendar.MILLISECOND);
 		System.out.println("SECONDO TRIMESTRE: " + sdf.format(secondoTrimestre.getTime()));
 		
 		//GIUGNO
 		Calendar terzoTrimestre = Calendar.getInstance();
 		terzoTrimestre.setTime(dataContabile);
-		terzoTrimestre.set(Calendar.MONTH,Calendar.JUNE);	
-		terzoTrimestre.set(Calendar.DATE,terzoTrimestre.getActualMaximum(Calendar.DAY_OF_MONTH));
-		terzoTrimestre.clear(Calendar.HOUR);
-		terzoTrimestre.clear(Calendar.MINUTE);
-		terzoTrimestre.clear(Calendar.SECOND);
-		terzoTrimestre.clear(Calendar.MILLISECOND);
+		terzoTrimestre.set(Calendar.DATE,terzoTrimestre.getActualMinimum(Calendar.DAY_OF_MONTH));
+		terzoTrimestre.set(Calendar.MONTH,Calendar.JUNE);
+		terzoTrimestre.set(Calendar.DAY_OF_MONTH,terzoTrimestre.getActualMaximum(Calendar.DAY_OF_MONTH));		
 		System.out.println("TERZO TRIMESTRE: " + sdf.format(terzoTrimestre.getTime()));
 		
 		//SETTEMBRE
-		Calendar quartoTrimestre = Calendar.getInstance();
+		Calendar quartoTrimestre = Calendar.getInstance();		
 		quartoTrimestre.setTime(dataContabile);
-		quartoTrimestre.set(Calendar.MONTH,Calendar.SEPTEMBER);	
+		quartoTrimestre.set(Calendar.DATE,quartoTrimestre.getActualMinimum(Calendar.DAY_OF_MONTH));
+		quartoTrimestre.set(Calendar.MONTH,Calendar.SEPTEMBER);
 		quartoTrimestre.set(Calendar.DATE,quartoTrimestre.getActualMaximum(Calendar.DAY_OF_MONTH));
-		quartoTrimestre.clear(Calendar.HOUR);
-		quartoTrimestre.clear(Calendar.MINUTE);
-		quartoTrimestre.clear(Calendar.SECOND);
-		quartoTrimestre.clear(Calendar.MILLISECOND);
-		System.out.println("QUARTO TRIMESTRE: " + sdf.format(quartoTrimestre.getTime()));
+		System.out.println("QUARTO TRIMESTRE4: " + sdf.format(quartoTrimestre.getTime()));
 		
 		if(dataContabile.before(secondoTrimestre.getTime())){
 			result = primoTrimestre.getTime();
